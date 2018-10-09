@@ -1,0 +1,22 @@
+<div>
+    <form [formGroup]="searchForm" (ngSubmit)="getbooks()" fxLayout="column">
+        <mat-form-field class="searchBox" appearance="outline">
+            <input type="text" matInput placeholder="Search A Book Here" formControlName="searchText">
+        </mat-form-field>
+        <div fxLayout="row"  class="radio" fxLayoutGap="3%">
+            <label>Search By:</label>
+            <div class="radio" *ngFor="let filter of searchBy">
+                <input type="radio" formControlName="filter" [value]="filter">{{ filter }}
+            </div>
+            <div class="dropdown"> 
+                    <mat-select placeholder="Select Category" class="options" formControlName="category">
+                            <mat-option [value]=filter  *ngFor="let filter of category">{{filter}}</mat-option>
+                    </mat-select>
+            </div>
+        </div>
+        
+        <button mat-raised-button class="searchIcon" type="submit" color="accent">Search
+            <mat-icon>search</mat-icon>
+        </button>
+    </form>
+</div>

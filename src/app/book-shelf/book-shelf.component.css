@@ -1,0 +1,24 @@
+.card {
+    width: auto;
+    height : auto;
+    border-width: 2px;
+    border-color: red;
+    align-self: center;
+    margin-bottom: 15%;
+    cursor: pointer;
+  }
+  .mat-card-image{
+    width: 300px;
+    height: 300px;
+  }
+  .mat-card-content{
+    width:250px;
+    height: 50px;
+    font-size: 20px;
+    font-family: cursive;
+    font-weight: bolder;
+  }
+  .mat-card:not([class*=mat-elevation-z]){
+  box-shadow: 0 3px 1px -2px #3f51b5, 0 2px 2px 0 #3f51b5, 0 1px 5px 0 rgba(0,0,0,.12);
+  }
+  

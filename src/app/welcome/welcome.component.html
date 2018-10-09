@@ -1,0 +1,33 @@
+<div class="container" fxLayout="column">
+
+  <div class="navBar">
+    <mat-toolbar color="primary">
+      <span>My Library</span>
+      <span class="fill-remaining-space"></span>
+      <div class="login" fxLayout="row" fxHide.xs="true">
+        <button mat-raised-button color="primary" (click)="popUp()">Login
+          <mat-icon>vpn_key</mat-icon>
+        </button>
+        <button mat-raised-button color="primary">SignUp
+          <mat-icon>create</mat-icon>
+        </button>
+      </div>
+      <div class="login" fxLayout="row" fxHide.xs="false" fxHide.gt-xs="true" fxLayoutGap="10px">
+        <mat-icon (click)="popUp()">vpn_key</mat-icon>
+        <mat-icon>create</mat-icon>
+      </div>
+    </mat-toolbar>
+  </div>
+  <div class="searchBar">
+    <app-search-bar (foundBooks)="onBooksFound($event)" [category]=category></app-search-bar>
+  </div>
+  <div class="bookShelf" *ngIf="showResult">
+    <label> Found {{filteredBooks.length}} books with "{{searchString}}"</label>
+  </div>
+  <div>
+    <hr>
+  </div>
+  <div class="bookShelf" fxLayout="row" fxLayoutGap="3%">
+    <app-book-shelf *ngFor="let book of filteredBooks " [book]="book"></app-book-shelf>
+  </div>
+</div>
