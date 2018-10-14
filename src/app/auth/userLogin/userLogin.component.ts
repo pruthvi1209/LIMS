@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-userlogin',
@@ -10,23 +11,14 @@ import { MatDialog } from '@angular/material';
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor( private userService: UserService, private router: Router,  public dialog: MatDialog) { }
+  constructor( private userService: UserService, private router: Router,  public dialog: MatDialog, private authService: AuthService) { }
   currentUser;
   ngOnInit() {
   }
   onSubmit(formData) {
-    this.userService.getAuthorization(formData.value.email).then((value) => {
-      console.log(value.password);
-      if (value.password === formData.value.password) {
-        this.dialog.closeAll();
-        this.userService.activeUser = value;
-        this.router.navigate(['userProfile']);
-      } else {
-        console.log('Un Authorized Attempt');
-      }
-    }).catch(() => {
-      console.log('No User Found');
-    });
+    this.authService.signIn(formData.value.email, formData.value.password, this.dialog);
   }
-
+  socailLogin(service) {
+    this.authService.social(service, this.dialog);
+  }
 }

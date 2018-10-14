@@ -24,3 +24,10 @@
 flex-wrap: wrap;
 align-self:flex-end;
 }
+
+.userImage{
+    border-radius: 50%;
+    height: 80%;
+    align-self: center;
+    vertical-align: middle;
+}

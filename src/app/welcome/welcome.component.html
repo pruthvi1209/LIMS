@@ -4,18 +4,28 @@
     <mat-toolbar color="primary">
       <span>My Library</span>
       <span class="fill-remaining-space"></span>
-      <div class="login" fxLayout="row" fxHide.xs="true">
-        <button mat-raised-button color="primary" (click)="popUp()">Login
-          <mat-icon>vpn_key</mat-icon>
-        </button>
-        <button mat-raised-button color="primary">SignUp
-          <mat-icon>create</mat-icon>
-        </button>
-      </div>
-      <div class="login" fxLayout="row" fxHide.xs="false" fxHide.gt-xs="true" fxLayoutGap="10px">
-        <mat-icon (click)="popUp()">vpn_key</mat-icon>
-        <mat-icon>create</mat-icon>
-      </div>
+      <ng-template [ngIf]="!authService.checkUser() ">
+        <div class="login" fxLayout="row" fxHide.xs="true">
+          <button mat-raised-button color="primary" (click)="popUp()">Login
+            <mat-icon>vpn_key</mat-icon>
+          </button>
+          <button mat-raised-button (click)="register()" color="primary">SignUp
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+        <div class="login" fxLayout="row" fxHide.xs="false" fxHide.gt-xs="true" fxLayoutGap="10px">
+          <mat-icon (click)="popUp()">vpn_key</mat-icon>
+          <mat-icon (click)="register()">create</mat-icon>
+        </div>
+      </ng-template>
+      <ng-template [ngIf]="authService.checkUser()"  >
+        <!-- <img src="assets/default_user_image.png" class="userImage" #dp> -->
+           <img src="{{dp}}" [matMenuTriggerFor]="userMenu" class="userImage" >
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item>My Profile</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </ng-template>
     </mat-toolbar>
   </div>
   <div class="searchBar">

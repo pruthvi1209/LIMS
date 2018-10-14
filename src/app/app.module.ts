@@ -20,6 +20,7 @@ import { UserLoginComponent } from './auth/userLogin/userLogin.component';
 import { SignUpComponent } from './auth/signUp/signUp.component';
 import { UserService } from './user.service';
 import { UserProfileComponent } from './userProfile/userProfile.component';
+import { AuthService } from './auth/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +44,8 @@ import { UserProfileComponent } from './userProfile/userProfile.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [BooksFetch, UserService],
-  entryComponents: [BookShelfComponent, AuthComponent],
+  providers: [BooksFetch, UserService, AuthService],
+  entryComponents: [BookShelfComponent, AuthComponent, SignUpComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
