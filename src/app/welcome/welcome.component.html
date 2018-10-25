@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column">
 
   <div class="navBar">
-    <mat-toolbar color="primary">
+    <mat-toolbar   color="primary">
       <span>My Library</span>
       <span class="fill-remaining-space"></span>
       <ng-template [ngIf]="!authService.checkUser() ">
@@ -19,10 +19,9 @@
         </div>
       </ng-template>
       <ng-template [ngIf]="authService.checkUser()"  >
-        <!-- <img src="assets/default_user_image.png" class="userImage" #dp> -->
            <img src="{{dp}}" [matMenuTriggerFor]="userMenu" class="userImage" >
         <mat-menu #userMenu="matMenu">
-          <button mat-menu-item>My Profile</button>
+          <button mat-menu-item routerLink="/userProfile">My Profile</button>
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </ng-template>

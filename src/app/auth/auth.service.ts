@@ -49,7 +49,7 @@ export class AuthService {
         // this.currentUser = new Observable ( (observer) => {
         //      observer.next(result.user.providerData);
         // });
-        this.currentUser = result.user.providerData;
+        this.currentUser = result.user.providerData[0];
         dialog.closeAll();
     }).catch(function (error) {
         // Handle Errors here.

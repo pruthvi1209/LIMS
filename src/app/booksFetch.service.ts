@@ -13,4 +13,7 @@ export class BooksFetch {
             return data;
         }));
     }
+    getBooksWithISBN(isbn) {
+        
+    }
 }

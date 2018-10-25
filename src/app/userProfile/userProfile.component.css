@@ -1,0 +1,24 @@
+.fill-remaining-space {
+    flex: 1 0 auto;
+  }
+
+  .example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .userImage{
+      border-radius: 50%;
+      width:90%;
+  }
+  .sideNav{
+      width: 25%;
+      background-color: black;
+  }
+  .mat-tab-group{
+      width: -webkit-fill-available;
+      height: -webkit-fill-available;
+  }

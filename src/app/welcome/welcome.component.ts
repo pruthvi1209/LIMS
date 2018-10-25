@@ -57,7 +57,7 @@ export class WelcomeComponent implements OnInit {
       // this.authService.currentUser.subscribe((value) => {
       //   console.log(value);
       // });
-      this.dp = this.authService.currentUser[0].photoURL;
+      this.dp = this.authService.currentUser.photoURL;
     });
   }
   register() {
