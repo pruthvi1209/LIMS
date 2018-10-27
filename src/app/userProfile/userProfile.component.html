@@ -1,16 +1,16 @@
 <div>
         <mat-toolbar color="primary">
-                <span>My Library</span>
+                <span routerLink="/">My Library</span>
                 <span class="fill-remaining-space"></span>
                 <button mat-raised-button (click)="logout()">Logout</button>
         </mat-toolbar>
         <div fxLayout="row">
         <mat-sidenav mode="side" opened class="sideNav">
-                <img src="{{dp}}" class="userImage">
+           <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' " class="userImage" >
         </mat-sidenav>
         <mat-tab-group >
                 <mat-tab label="Books To Return">
-                       <!-- <app-book-shelf ></app-book-shelf>  -->
+                        <!-- <app-book-shelf ></app-book-shelf>  --> -->
                 </mat-tab>
                 <mat-tab label="Fav">
                         <app-adminlogin></app-adminlogin>

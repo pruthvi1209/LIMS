@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Books } from '../dataModels/books.model';
 import { BooksFetch } from '../booksFetch.service';
 import { MatDialog } from '@angular/material';
@@ -20,7 +20,6 @@ export class WelcomeComponent implements OnInit {
   allBooks: Books[];
   showResult = false;
   category = [];
-  dp = 'assets/default_user_image.png';
   ngOnInit() {
     this.booksService.getAllBooks().subscribe(books => {
       this.allBooks = books;
@@ -53,12 +52,6 @@ export class WelcomeComponent implements OnInit {
 
   popUp() {
     const dialogRef = this.dialog.open(AuthComponent);
-    dialogRef.afterClosed().subscribe(() => {
-      // this.authService.currentUser.subscribe((value) => {
-      //   console.log(value);
-      // });
-      this.dp = this.authService.currentUser.photoURL;
-    });
   }
   register() {
     const dialogRef = this.dialog.open(SignUpComponent);

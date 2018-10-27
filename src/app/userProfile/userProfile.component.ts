@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./userProfile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  dp = 'assets/default_user_image.png';
   constructor( private userService: UserService, private authService: AuthService, private router: Router) { }
   ngOnInit() {
-    console.log(this.authService.currentUser.email);
-    this.dp = this.authService.currentUser.photoURL;
+    setTimeout(() => {
+      this.userService.getUserData().then((user) => {
+        console.log(user);
+      });
+    }, 1000);
   }
 
   logout() {

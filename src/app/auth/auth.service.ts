@@ -1,6 +1,5 @@
 import * as firebase from 'firebase';
-import { MatDialog } from '@angular/material';
-import { Observable, Observer, observable } from 'rxjs';
+
 
 export class AuthService {
 
@@ -10,18 +9,6 @@ export class AuthService {
     signup(email: string, password: string) {
         return firebase.auth().createUserWithEmailAndPassword(email, password);
     }
-    getToken() {
-        firebase.auth().currentUser.getIdToken().then(
-            (token) => this.token = token
-        ).catch(
-            error => console.log(error)
-        );
-    }
-    isUserAuthenticated() {
-        console.log(this.token);
-        return this.token != null;
-    }
-
     signIn(email, password, dialog) {
         firebase.auth().signInWithEmailAndPassword(email, password).then((value) => {
             dialog.closeAll();
@@ -30,7 +17,7 @@ export class AuthService {
         );
     }
     checkUser() {
-        return firebase.auth().currentUser != null;
+        return this.currentUser != null;
     }
     logout() {
         return firebase.auth().signOut();
@@ -43,13 +30,6 @@ export class AuthService {
          userDetails = new firebase.auth.GoogleAuthProvider();
     }
     firebase.auth().signInWithPopup(userDetails).then((result) => {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const token = result.credential;
-        // The signed-in user info.
-        // this.currentUser = new Observable ( (observer) => {
-        //      observer.next(result.user.providerData);
-        // });
-        this.currentUser = result.user.providerData[0];
         dialog.closeAll();
     }).catch(function (error) {
         // Handle Errors here.
@@ -63,4 +43,19 @@ export class AuthService {
         // ...
     });
 }
+autoAuth() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        user.getIdToken().then(
+          (token: string) => {
+            this.token = token;
+          });
+          this.currentUser = user;
+        //   console.log(user);
+      } else {
+        this.currentUser = null;
+        this.token = null;
+      }
+    });
+  }
 }
