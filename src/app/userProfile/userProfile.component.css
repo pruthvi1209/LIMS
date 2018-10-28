@@ -15,10 +15,25 @@
       width:90%;
   }
   .sideNav{
-      width: 25%;
-      background-color: black;
+      width: 13%;
+      background-color: #3f51b5;
   }
   .mat-tab-group{
       width: -webkit-fill-available;
       height: -webkit-fill-available;
+  }
+  .bookShelf{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .spinner{
+      align-items: center;
+      justify-items: center;
+      margin-top: 20%;
+  }
+ 
+  .userSmallImage{
+    float: right;
+    width: 25%;
+    border-radius: 50%;
   }

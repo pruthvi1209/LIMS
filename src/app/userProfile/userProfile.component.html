@@ -2,19 +2,33 @@
         <mat-toolbar color="primary">
                 <span routerLink="/">My Library</span>
                 <span class="fill-remaining-space"></span>
-                <button mat-raised-button (click)="logout()">Logout</button>
+                <button mat-raised-button (click)="logout()" fxHide.xs="true" fxHide.gt-xs="false">Logout</button>
+                <div *ngIf="isLoading">
+                        <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' "
+                                class="userSmallImage" fxHide.xs="false" fxHide.gt-xs="true" [matMenuTriggerFor]="userOptions">
+                        <mat-menu #userOptions="matMenu">
+                                <button mat-menu-item (click)="logout()">Logout</button>
+                        </mat-menu>
+                </div>
         </mat-toolbar>
-        <div fxLayout="row">
-        <mat-sidenav mode="side" opened class="sideNav">
-           <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' " class="userImage" >
-        </mat-sidenav>
-        <mat-tab-group >
-                <mat-tab label="Books To Return">
-                        <!-- <app-book-shelf ></app-book-shelf>  --> -->
-                </mat-tab>
-                <mat-tab label="Fav">
-                        <app-adminlogin></app-adminlogin>
-                </mat-tab>
-        </mat-tab-group>
+        <div class="spinner" fxLayout="column" *ngIf="!isLoading">
+                <mat-spinner></mat-spinner>
+        </div>
+        <div fxLayout="row" *ngIf="isLoading">
+                <mat-sidenav mode="side" opened class="sideNav" fxHide.xs="true" fxHide.gt-xs="false">
+                        <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' "
+                                class="userImage">
+                </mat-sidenav>
+                <mat-tab-group>
+                        <mat-tab label="Books To Return">
+                                <div class="bookShelf" fxLayout="row" fxLayoutGap="3%">
+                                        <app-book-shelf *ngFor="let book of borrowedBooks " [book]="book"
+                                                [isReturnDateVisible]="true"></app-book-shelf>
+                                </div>
+                        </mat-tab>
+                        <mat-tab label="Wishlist">
+                                <app-book-shelf *ngFor="let book of whisList " [book]="book" [isReturnDateVisible]="false"></app-book-shelf>
+                        </mat-tab>
+                </mat-tab-group>
         </div>
 </div>

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     authDomain: 'lib1209-216918.firebaseapp.com'
   });
 
-  this.authService.autoAuth();
+  this.authService.initailAuth();
   }
 
 }

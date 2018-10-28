@@ -21,7 +21,7 @@
       <ng-template [ngIf]="authService.checkUser()"  >
            <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' " [matMenuTriggerFor]="userMenu" class="userImage" >
         <mat-menu #userMenu="matMenu">
-          <button mat-menu-item routerLink="/userProfile">My Profile</button>
+          <button mat-menu-item (click)="navigate()">My Profile</button>
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </ng-template>

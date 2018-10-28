@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material';
 import { AuthComponent } from '../auth/auth.component';
 import { SignUpComponent } from '../auth/signUp/signUp.component';
 import { AuthService } from '../auth/auth.service';
+import { UIService } from '../../shared/ui.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -12,7 +14,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private booksService: BooksFetch, public dialog: MatDialog, private authService: AuthService) {
+  constructor(private booksService: BooksFetch, public dialog: MatDialog, private authService: AuthService, private uiService: UIService,
+              private router: Router) {
   // this.authService.getToken();
   }
   searchString = '';
@@ -58,5 +61,9 @@ export class WelcomeComponent implements OnInit {
   }
   logout() {
     this.authService.logout();
+  }
+  navigate() {
+    this.uiService.loadingStateChanged.next(true);
+    this.router.navigate(['/userProfile']);
   }
 }
