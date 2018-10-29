@@ -10,8 +10,8 @@
   <label *ngIf="isReturnDateVisible">Return Date:</label>
   <label *ngIf="isReturnDateVisible" [ngStyle]="{'color':dateColor}"> {{returnDate.toDateString()}}</label>
   <mat-card-actions *ngIf="!isReturnDateVisible">
-    <button mat-button (click) ="userService.userAccountModification('whisList',book.isbn)">Fav</button>
-    <button mat-button>Borrow</button>
+    <button mat-button (click) ="userService.userAccountModification('wishList',book.isbn)">Fav</button>
+    <button mat-button (click) ="userService.userAccountModification('borrowBook',book.isbn)">Borrow</button>
   </mat-card-actions>
   <mat-card-actions *ngIf="isReturnDateVisible">
       <button mat-button>Return Book</button>

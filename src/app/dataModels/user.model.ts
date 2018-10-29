@@ -3,7 +3,7 @@ export class User {
     name: string;
     role: string;
     borrowedBooks: OwedBook[];
-    whisList: Favorites[];
+    wishList: Favorites[];
 
     constructor(email: string, name: string, role: string) {
         this.name = name;
@@ -19,10 +19,10 @@ export class User {
     borrowedDate: string;
     isRenewed: boolean;
     constructor( isbn: number , returnDate: string , borrowedDate: string, isRenewed: boolean) {
-        isbn = this.isbn ;
-        returnDate = this.returnDate;
-        borrowedDate = this.borrowedDate;
-        isRenewed = this.isRenewed;
+        this.isbn = isbn ;
+        this.returnDate = returnDate;
+        this. borrowedDate = borrowedDate;
+        this.isRenewed = isRenewed;
 
  }
 

@@ -46,6 +46,9 @@ export class UserService {
                                         date.setDate(date.getDate() + 7).toString(),
                                         date.toDateString(),
                                         false);
+                                        if (!this.currentUser.borrowedBooks) {
+                                            this.currentUser.borrowedBooks = [];
+                                        }
                                     this.currentUser.borrowedBooks.push(newSubscription);
                                     break;
             case 'renewBook'    :   this.currentUser.borrowedBooks.forEach(book => {
@@ -55,11 +58,11 @@ export class UserService {
                                             }
                                         });
                                     break;
-            case 'whisList'     :   const newFav = new Favorites(isbn);
-                                        if (!this.currentUser.whisList) {
-                                            this.currentUser.whisList = [];
+            case 'wishList'     :   const newFav = new Favorites(isbn);
+                                        if (!this.currentUser.wishList) {
+                                            this.currentUser.wishList = [];
                                         }
-                                    this.currentUser.whisList.push(newFav);
+                                    this.currentUser.wishList.push(newFav);
                                     break;
             case 'return'       :   const index = this.currentUser.borrowedBooks.indexOf(isbn);
                                         if (index > 1) {

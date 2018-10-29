@@ -15,24 +15,33 @@ import { BooksFetch } from '../booksFetch.service';
 export class UserProfileComponent implements OnInit {
   isLoading = false;
   private loadingSubs: Subscription;
-  borrowedBooks;
-  whisListSubscription: Subscription;
-  whisList = [];
+  borrowedBooks = [];
+  wishListSubscription: Subscription;
+  wishList = [];
   constructor( private userService: UserService, private authService: AuthService, private router: Router,
                private uiService: UIService, private booksService: BooksFetch ) { }
   ngOnInit() {
       this.loadingSubs = this.uiService.loadingStateChanged.subscribe((isLoading) => {
         this.isLoading =  isLoading;
       });
-      this.authService.autoAuth().then( () => {
+      this.authService.autoAuth().then(() => {
       this.userService.getUserData().then((user) => {
-        this.borrowedBooks = user.borrowedbooks;
-        this.booksService.getBooksWithISBN(user.wishlist);
-        this.whisListSubscription = this.booksService.filteredBooks.subscribe( (books) => {
-          this.whisList.push(books);
+        if (user.borrowedBooks) {
+        user.borrowedBooks.forEach(book => {
+          this.booksService.getBooksWithISBN(book.isbn).then((data) => {
+            this.borrowedBooks.push(data);
+          });
+        });
+      }
+        if (user.wishList) {
+        user.wishList.forEach(book => {
+          this.booksService.getBooksWithISBN(book.isbn).then((data) => {
+            this.wishList.push(data);
+          });
+        });
+      }
         });
       });
-    });
   }
 
   logout() {
