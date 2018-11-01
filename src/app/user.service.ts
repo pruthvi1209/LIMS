@@ -40,15 +40,18 @@ export class UserService {
         this.getUserData().then ( () => {
         const token = this.authService.token;
         const date = new Date();
+        const currentDate = date.toDateString();
+        const returnDate = date.setDate(date.getDate() + 7).toString();
         switch (modification) {
             case 'borrowBook'   :   const newSubscription = new OwedBook(
                                         isbn,
-                                        date.setDate(date.getDate() + 7).toString(),
                                         date.toDateString(),
+                                        currentDate,
                                         false);
                                         if (!this.currentUser.borrowedBooks) {
                                             this.currentUser.borrowedBooks = [];
                                         }
+                                    console.log(date.toDateString());
                                     this.currentUser.borrowedBooks.push(newSubscription);
                                     break;
             case 'renewBook'    :   this.currentUser.borrowedBooks.forEach(book => {

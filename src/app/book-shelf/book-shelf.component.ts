@@ -12,16 +12,15 @@ import { AuthService } from '../auth/auth.service';
 export class BookShelfComponent implements OnInit {
   @Input() book;
   @Input() isReturnDateVisible: boolean;
-  returnDate;
+  @Input() returnDate;
   dateColor = 'blue';
   overDue: number;
   constructor( private userService: UserService, private authService: AuthService) {
   }
 
   ngOnInit() {
-
     if (this.isReturnDateVisible) {
-      this.returnDate = new Date(this.book.returnDate);
+      this.returnDate = new Date(this.returnDate);
       const today = new  Date();
       const ONE_DAY = 1000 * 60 * 60 * 24;
       this.overDue = Math.ceil((this.returnDate.getTime()  - ( today.getTime())) / ONE_DAY);

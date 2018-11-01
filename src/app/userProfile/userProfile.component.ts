@@ -16,6 +16,7 @@ export class UserProfileComponent implements OnInit {
   isLoading = false;
   private loadingSubs: Subscription;
   borrowedBooks = [];
+  booksReturnDate = [];
   wishListSubscription: Subscription;
   wishList = [];
   constructor( private userService: UserService, private authService: AuthService, private router: Router,
@@ -28,6 +29,7 @@ export class UserProfileComponent implements OnInit {
       this.userService.getUserData().then((user) => {
         if (user.borrowedBooks) {
         user.borrowedBooks.forEach(book => {
+          this.booksReturnDate.push(book.returnDate);
           this.booksService.getBooksWithISBN(book.isbn).then((data) => {
             this.borrowedBooks.push(data);
           });
