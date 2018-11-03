@@ -64,6 +64,10 @@ export class WelcomeComponent implements OnInit {
   }
   navigate() {
     this.uiService.loadingStateChanged.next(true);
+    if (this.authService.currentUser.email === 'admin@admin.com') {
+    this.router.navigate(['/adminProfile']);
+    } else {
     this.router.navigate(['/userProfile']);
   }
+}
 }

@@ -20,6 +20,7 @@ import { UserLoginComponent } from './auth/userLogin/userLogin.component';
 import { SignUpComponent } from './auth/signUp/signUp.component';
 import { UserService } from './user.service';
 import { UserProfileComponent } from './userProfile/userProfile.component';
+import { BookDetailsComponent } from './bookDetails/bookDetails.component';
 import { AuthService } from './auth/auth.service';
 import { UIService } from '../shared/ui.service';
 @NgModule({
@@ -32,7 +33,8 @@ import { UIService } from '../shared/ui.service';
     AdminLoginComponent,
     UserLoginComponent,
     SignUpComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    BookDetailsComponent
 
   ],
   imports: [
@@ -46,7 +48,7 @@ import { UIService } from '../shared/ui.service';
     ReactiveFormsModule
   ],
   providers: [BooksFetch, UserService, AuthService, UIService],
-  entryComponents: [BookShelfComponent, AuthComponent, SignUpComponent],
+  entryComponents: [BookShelfComponent, AuthComponent, SignUpComponent, BookDetailsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

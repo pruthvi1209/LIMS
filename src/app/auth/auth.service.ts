@@ -11,6 +11,10 @@ export class AuthService {
     }
     signIn(email, password, dialog) {
         firebase.auth().signInWithEmailAndPassword(email, password).then((value) => {
+            console.log(value.user.email);
+            if (value.user.email === 'admin@admin.com') {
+                this.currentUser = 'admin';
+            }
             dialog.closeAll();
             console.log('Logged in ');
         }).catch(error => console.log(error)

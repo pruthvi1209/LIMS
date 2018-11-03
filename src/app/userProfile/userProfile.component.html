@@ -22,17 +22,18 @@
                 <mat-tab-group>
                         <mat-tab label="Books To Return">
                                 <div class="bookShelf" fxLayout="row" fxLayoutGap="3%">
-                                         <app-book-shelf *ngFor="let book of borrowedBooks; let i=index " [book]="book" [returnDate]="booksReturnDate[i]"
-                                                [isReturnDateVisible]="true"></app-book-shelf>
-                                                
+                                        <app-book-shelf *ngFor="let book of borrowedBooks; let i=index " [book]="book"
+                                                [returnDate]="booksReturnDate[i]" [isReturnDateVisible]="true" [index]="i"></app-book-shelf>
+
                                 </div>
                         </mat-tab>
                         <mat-tab label="Wishlist">
-                                        <div class="bookShelf" fxLayout="row" fxLayoutGap="3%">
-                                <app-book-shelf *ngFor="let book of wishList " [book]="book" [isReturnDateVisible]="false"  ></app-book-shelf>
-                                                </div>
+                                <div class="bookShelf" fxLayout="row" fxLayoutGap="3%">
+                                        <app-book-shelf *ngFor="let book of wishList; let i=index" [book]="book"
+                                                [isReturnDateVisible]="false" [isFav]="true" [index]="i"></app-book-shelf>
+                                </div>
                         </mat-tab>
-                        
+
                 </mat-tab-group>
         </div>
 </div>

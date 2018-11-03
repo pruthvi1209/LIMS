@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Books } from '../dataModels/books.model';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { UserService } from '../user.service';
 import { AuthService } from '../auth/auth.service';
+import { BookDetailsComponent } from '../bookDetails/bookDetails.component';
 
 @Component({
   selector: 'app-book-shelf',
@@ -13,9 +14,11 @@ export class BookShelfComponent implements OnInit {
   @Input() book;
   @Input() isReturnDateVisible: boolean;
   @Input() returnDate;
+  @Input() index;
+  @Input() isFav;
   dateColor = 'blue';
   overDue: number;
-  constructor( private userService: UserService, private authService: AuthService) {
+  constructor( private userService: UserService, private authService: AuthService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -29,5 +32,13 @@ export class BookShelfComponent implements OnInit {
       }
     }
   }
-
+returnBook(modification, isbn) {
+  this.isReturnDateVisible = !this.isReturnDateVisible;
+  this.userService.userAccountModification(modification, isbn);
+}
+openModal(book) {
+  const dialogRef = this.dialog.open(BookDetailsComponent);
+  const instance = dialogRef.componentInstance;
+  instance.book = this.book;
+}
 }
