@@ -15,7 +15,7 @@ import { BooksFetch } from './booksFetch.service';
 import { HttpModule } from '@angular/http';
 import { BookShelfComponent } from './book-shelf/book-shelf.component';
 import { AuthComponent } from './auth/auth.component';
-import { AdminLoginComponent } from './auth/adminLogin/adminLogin.component';
+import { AdminProfileComponent } from './adminProfile/adminProfile.component';
 import { UserLoginComponent } from './auth/userLogin/userLogin.component';
 import { SignUpComponent } from './auth/signUp/signUp.component';
 import { UserService } from './user.service';
@@ -23,6 +23,7 @@ import { UserProfileComponent } from './userProfile/userProfile.component';
 import { BookDetailsComponent } from './bookDetails/bookDetails.component';
 import { AuthService } from './auth/auth.service';
 import { UIService } from '../shared/ui.service';
+import { NewBookComponent } from './adminProfile/newBook/newBook.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,11 +31,12 @@ import { UIService } from '../shared/ui.service';
     SearchBarComponent,
     BookShelfComponent,
     AuthComponent,
-    AdminLoginComponent,
+    AdminProfileComponent,
     UserLoginComponent,
     SignUpComponent,
     UserProfileComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    NewBookComponent
 
   ],
   imports: [

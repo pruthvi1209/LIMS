@@ -1,0 +1,11 @@
+.bookImage{
+    height: 240px;
+    width:  240px;
+}
+.bookDetails{
+    margin-left: 10px;
+}
+.dialog{
+ cursor: pointer;
+ float: right;
+}

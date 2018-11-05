@@ -15,10 +15,22 @@
                 <mat-spinner></mat-spinner>
         </div>
         <div fxLayout="row" *ngIf="isLoading">
-                <mat-sidenav mode="side" opened class="sideNav" fxHide.xs="true" fxHide.gt-xs="false">
+                <!-- <mat-sidenav mode="side" opened class="sideNav" fxHide.xs="true" fxHide.gt-xs="false">
                         <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' "
                                 class="userImage">
-                </mat-sidenav>
+                </mat-sidenav> -->
+                <div class="sideNav" fxHide.xs="true" fxHide.gt-xs="false">
+                        <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' "
+                        class="userImage">
+                        <div>
+                                Books owed:
+                                {{borrowedBooks.length}}
+                        </div>
+                        <div>
+                                Fav books:
+                                {{wishList.length}}
+                        </div>
+                </div>
                 <mat-tab-group>
                         <mat-tab label="Books To Return">
                                 <div class="bookShelf" fxLayout="row" fxLayoutGap="3%">

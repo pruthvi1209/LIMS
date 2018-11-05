@@ -1,1 +1,21 @@
+<div class="fa fa-close dialog" (click)="closeDialog()"></div>
+<div class="layout">
 <h1> {{book.title}}</h1>
+<div class="container" fxLayout="row wrap" >
+    <div>
+        <img class="bookImage" src={{book.url}} alt="Photo not available" (click)="openModal(book)">
+    </div>
+    <div class="bookDetails" fxLayout="column" >
+        <div>Name:  {{book.title}}</div>
+        <div>Author: {{book.author}}</div>
+        <div>Category: {{book.category}}</div>
+        <div>isbn: {{book.isbn}}</div>
+        <div fxLayout="row">Rating : <div *ngFor="let star of starList"  fxLayout="row">
+                        <div class ="{{ star ? 'fa fa-star' : 'fa  fa-star-o' }}">
+                        </div>
+                     </div>
+    </div>
+
+
+</div>
+</div>
