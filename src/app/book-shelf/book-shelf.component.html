@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" id={{book.isbn}}>
 <mat-card class="card"  >
   <img mat-card-image src={{book.url}} alt="Photo not available" (click)="openModal(book)">
   <mat-card-content>
@@ -10,12 +10,12 @@
   <label *ngIf="isReturnDateVisible">Return Date:</label>
   <label *ngIf="isReturnDateVisible" [ngStyle]="{'color':dateColor}"> {{returnDate.toDateString()}}</label>
   <mat-card-actions *ngIf="!isReturnDateVisible">
-    <button mat-button (click) ="returnBook('wishList',book.isbn)" *ngIf="!isFav" >
+    <button mat-button (click) ="userService.userAccountModification('wishList',book.isbn)" *ngIf="!isFav" >
       <mat-icon>
         favorite_border
       </mat-icon>
     </button>
-    <button mat-button (click) ="userService.userAccountModification('unFav',index)" *ngIf="isFav">
+    <button mat-button (click) ="userService.userAccountModification('unFav', book.isbn ,index)" *ngIf="isFav">
       <mat-icon>
         favorite
       </mat-icon>
@@ -23,7 +23,7 @@
     <button mat-button (click) ="userService.userAccountModification('borrowBook',book.isbn)">Borrow</button>
   </mat-card-actions>
   <mat-card-actions *ngIf="isReturnDateVisible">
-      <button mat-button (click) = "userService.userAccountModification('return',index)">Return Book</button>
+      <button mat-button (click) = "userService.userAccountModification('return',book.isbn ,index)">Return Book</button>
       <button mat-button>Renew Book</button>
     </mat-card-actions>
 </mat-card>

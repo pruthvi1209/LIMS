@@ -3,17 +3,17 @@ import {NgModule} from '@angular/core';
 import { MatButtonModule , MatIconModule, MatFormFieldModule, MatInputModule,
      MatCheckboxModule, MatToolbarModule, MatSelectModule, MatOptionModule,
      MatCardModule, MatRadioModule, MatDialogModule, MatTabsModule, MatMenuModule, MatSidenavModule,
-     MatProgressSpinnerModule} from '@angular/material';
+     MatProgressSpinnerModule, MatSnackBarModule} from '@angular/material';
 
 @NgModule({
     imports: [MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
          MatCheckboxModule, MatToolbarModule, MatSelectModule, MatOptionModule,
          MatCardModule, MatRadioModule, MatDialogModule, MatTabsModule, MatMenuModule, MatSidenavModule,
-         MatProgressSpinnerModule],
+         MatProgressSpinnerModule, MatSnackBarModule],
     exports: [MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
          MatCheckboxModule, MatToolbarModule, MatSelectModule, MatOptionModule,
           MatCardModule, MatRadioModule, MatDialogModule, MatTabsModule, MatMenuModule, MatSidenavModule,
-          MatProgressSpinnerModule]
+          MatProgressSpinnerModule, MatSnackBarModule]
 })
 export class MaterialModule {
 

@@ -38,86 +38,98 @@ export class UserService {
             }
         });
     }
-    userAccountModification(modification: string, isbn) {
-        this.getUserData().then ( () => {
-        const token = this.authService.token;
-        const date = new Date();
-        const currentDate = date.toDateString();
-        const returnDate = date.setDate(date.getDate() + 7).toString();
-        switch (modification) {
+    userAccountModification(modification: string, isbn, index?) {
+        let hitFirebase = true;
+        let snackMessage: string;
+        this.getUserData().then(() => {
+            const token = this.authService.token;
+            const date = new Date();
+            const currentDate = date.toDateString();
+            const returnDate = date.setDate(date.getDate() + 7).toString();
+            switch (modification) {
 
-            case 'borrowBook'   :       let alreadyBookExists = false;
-                                        const newSubscription = new OwedBook(
+                case 'borrowBook': let alreadyBookExists = false;
+                                    const newSubscription = new OwedBook(
                                         isbn,
                                         date.toDateString(),
                                         currentDate,
                                         false);
-                                        if (!this.currentUser.borrowedBooks) {
-                                            console.log("Array creted");
-                                            this.currentUser.borrowedBooks = [];
-                                        } else {
-                                            this.currentUser.borrowedBooks.forEach( book => {
-                                                if (book.isbn === isbn) {
-                                                    console.log('book already exists');
-                                                    alreadyBookExists = true;
-                                                }
-                                            });
-                                        }
-                                        if (!alreadyBookExists) {
-                                            this.currentUser.borrowedBooks.push(newSubscription);
-                                            }
-                                    break;
-
-            case 'renewBook'    :   this.currentUser.borrowedBooks.forEach(book => {
-                                            if (book.isbn === isbn && !book.isRenewed) {
-                                                book.isRenewed = true;
-                                                book.borrowedDate = currentDate;
-                                                book.returnDate = date.toDateString();
+                                    if (!this.currentUser.borrowedBooks) {
+                                        this.currentUser.borrowedBooks = [];
+                                    } else {
+                                        this.currentUser.borrowedBooks.forEach(book => {
+                                            if (book.isbn === isbn) {
+                                                this.uiservice.showSnackar('Book already exists', null, 2000);
+                                                alreadyBookExists = true;
+                                                hitFirebase = false;
                                             }
                                         });
+                                    }
+                                    if (!alreadyBookExists) {
+                                        this.currentUser.borrowedBooks.push(newSubscription);
+                                    }
+                                    snackMessage =  'Book borrowed sucessfully';
                                     break;
 
-            case 'wishList'     :   let alreadyFavExists = false;
-                                    const newFav = new Favorites(isbn);
-                                        if (!this.currentUser.wishList) {
-                                            this.currentUser.wishList = [];
-                                        } else {
-                                            this.currentUser.borrowedBooks.forEach( book => {
-                                                if (book.isbn === isbn) {
-                                                    console.log('book already exists');
-                                                    alreadyFavExists = true;
-                                                }
-                                            });
-                                        }
-                                        if (!alreadyFavExists) {
-                                            this.currentUser.borrowedBooks.push(newSubscription);
-                                            }
+                case 'renewBook': this.currentUser.borrowedBooks.forEach(book => {
+                                    if (book.isbn === isbn && !book.isRenewed) {
+                                        book.isRenewed = true;
+                                        book.borrowedDate = currentDate;
+                                        book.returnDate = date.toDateString();
+                                    }
+                                    });
+                                    snackMessage = 'Book Renwed sucessfully';
                                     break;
-            case 'return'       :  const index = isbn;
-                                   console.log('Retun Book', index);
-                                        if (index >= 0 ) {
-                                            this.currentUser.borrowedBooks.splice(index, 1);
+
+                case 'wishList':  let alreadyFavExists = false;
+                                  const newFav = new Favorites(isbn);
+                                    if (!this.currentUser.wishList) {
+                                        this.currentUser.wishList = [];
+                                    } else {
+                                        this.currentUser.wishList.forEach(book => {
+                                            if (book.isbn === isbn) {
+                                                this.uiservice.showSnackar('Book already exists', null, 2000);
+                                                alreadyFavExists = true;
+                                                hitFirebase = false;
+
                                             }
+                                        });
+                                    }
+                                    if (!alreadyFavExists) {
+                                        this.currentUser.wishList.push(newFav);
+                                    }
+                                    snackMessage =  'Book added to Wishlist sucessfully';
+                                    console.log(document.getElementById(isbn));
                                     break;
-            case 'unFav'        : const favNo = isbn;
-                                    if (favNo >= 0 ) {
-                                            this.currentUser.wishList.splice(favNo, 1);
-                                            console.log('deleted');
-                                            }
-                                    break;
-        }
-        this.http.put('https://lib1209-216918.firebaseio.com/users/' + this.userIndex + '.json?auth=' + token, this.currentUser).
-        subscribe((value) => {
-            if (value['status'] === 200) {
-                this.userDataChanged.next(true);
-                this.uiservice.loadingStateChanged.next(true);
-                console.log( 'ok');
-            }
-        },
-        (error) => {
-            console.log( error);
-        });
-    });
+                case 'return':
+                                if (index >= 0) {
+                                    this.currentUser.borrowedBooks.splice(index, 1);
+                                }
+                                snackMessage =  'Book returned sucessfully';
+                                document.getElementById(isbn).style.display = 'none';
+                                break;
+                case 'unFav': const favNo = index;
+                                if (favNo >= 0) {
+                                    this.currentUser.wishList.splice(favNo, 1);
+                                }
+                                snackMessage =  'Book removed  sucessfully';
+                                document.getElementById(isbn).style.display = 'none';
+                                break;
+                                }
+            if (hitFirebase === true) {
+            this.http.put('https://lib1209-216918.firebaseio.com/users/' + this.userIndex + '.json?auth=' + token, this.currentUser).
+                subscribe((value) => {
+                    if (value['status'] === 200) {
+                        this.userDataChanged.next(true);
+                        this.uiservice.loadingStateChanged.next(true);
+                        this.uiservice.showSnackar( snackMessage , null, 2000);
+                    }
+                },
+                    (error) => {
+                        this.uiservice.showSnackar(error.message, null, 2000);
+                    });
+                }
+                });
     }
 
     getUserData(): Promise<any> {
