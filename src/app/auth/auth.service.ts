@@ -1,11 +1,15 @@
 import * as firebase from 'firebase';
+import { Injectable } from '@angular/core';
+import { UIService } from '../../shared/ui.service';
 
-
+@Injectable()
 export class AuthService {
 
 
     currentUser;
     token: string;
+
+    constructor(private uiService: UIService) {}
     signup(email: string, password: string) {
         return firebase.auth().createUserWithEmailAndPassword(email, password);
     }
@@ -17,7 +21,10 @@ export class AuthService {
             }
             dialog.closeAll();
             console.log('Logged in ');
-        }).catch(error => console.log(error)
+        }).catch(error => {
+            this.uiService.showSnackar(error.message, null, 5000);
+            dialog.closeAll();
+        }
         );
     }
     checkUser() {
@@ -57,7 +64,6 @@ export class AuthService {
                         });
                     resolve();
                     this.currentUser = user;
-                    // console.log(user);
                 } else {
                     reject();
                     this.currentUser = null;
@@ -81,5 +87,12 @@ export class AuthService {
             }
         });
 
+    }
+    forgotPassword(eamil) {
+        firebase.auth().sendPasswordResetEmail(eamil).then(() => {
+        this.uiService.showSnackar('Password Recovery mail sent', null , 3000);
+        }).catch((e) => {
+        this.uiService.showSnackar(e.message, null , 3000);
+        });
     }
 }

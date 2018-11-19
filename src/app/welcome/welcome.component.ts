@@ -35,7 +35,7 @@ export class WelcomeComponent implements OnInit {
     });
   }
   onBooksFound(formData) {
-    this.searchString = formData.searchText.toLowerCase();
+    this.searchString = formData.searchText ? formData.searchString.toLowerCase() : '';
     const filter = formData.filter.toLowerCase();
     const category = formData.category.toLowerCase();
     if (filter === 'title') {

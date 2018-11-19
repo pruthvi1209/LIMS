@@ -11,6 +11,7 @@
         <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid"   >Submit</button>
         <button type="reset" mat-raised-button color="primary" [disabled]="!f.invalid" mat-dialog-close >Cancel</button>        
     </form>
+    <div (click)="updatePassword(f)" class="forgot"  fxLayoutAlign="center center">Forgot Password</div>
 <div fxLayout="row"><hr>Or<hr></div>
 <div class="social" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="10px">
 <button mat-fab color="primary" (click)= "socailLogin('facebook')">Facbook</button>
