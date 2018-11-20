@@ -24,6 +24,8 @@ import { BookDetailsComponent } from './bookDetails/bookDetails.component';
 import { AuthService } from './auth/auth.service';
 import { UIService } from '../shared/ui.service';
 import { NewBookComponent } from './adminProfile/newBook/newBook.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,8 @@ import { NewBookComponent } from './adminProfile/newBook/newBook.component';
     FlexLayoutModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [BooksFetch, UserService, AuthService, UIService],
   entryComponents: [BookShelfComponent, AuthComponent, SignUpComponent, BookDetailsComponent],
