@@ -9,3 +9,15 @@
  cursor: pointer;
  float: right;
 }
+.outline{
+    color: gold;
+}
+.rightButton{
+    align-self: flex-start;
+}
+.leftButton{
+    justify-self: flex-end;
+}
+.layout{
+    justify-content: center;
+}

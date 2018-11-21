@@ -9,24 +9,30 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
-  @Output() foundBooks = new EventEmitter<any[]>();
+  @Output() findWithText = new EventEmitter<any[]>();
   @Input() category ;
-  searchForm: FormGroup;
-
+  searchText: FormControl;
   searchBy = [ 'Author', 'Title'];
   books: Books [];
-  searchText = '';
-  constructor( private booksService: BooksFetch) {
+  myfilter = this.searchBy[1];
+  searchParams= ['', this.myfilter];
+  dropDown = "all";
+  advance= false;
+  constructor() {
   }
 
   ngOnInit() {
-    this.searchForm = new FormGroup ({
-      'searchText' : new FormControl (null),
-      'filter': new FormControl ('Title'),
-      'category': new FormControl ()
-    });
+    this.searchText = new   FormControl();
+    this.searchText.valueChanges.subscribe((term) =>{
+    this.searchBook(term);
+    })
     }
-  getbooks() {
-    this.foundBooks.emit(this.searchForm.value);
-  }
+    searchBook( text? ){
+    this.searchParams=[text ? text : ' ', this.myfilter, this.dropDown ? this.dropDown : 'all'];
+    this.findWithText.emit(this.searchParams);
+    }
+    // showFilters() {
+    //   console.log(this.advance)
+    //   return this.advance;
+    // }
 }

@@ -8,6 +8,7 @@ align-self: center;
     font-family: cursive;
     font-weight: bolder;
     flex-wrap: wrap;
+    widows: auto;
 }
 .searchIcon{
     width:20%;
@@ -18,5 +19,11 @@ align-self: center;
     align-self: center;
 }
 .options{
-    max-width:100%;
+    margin-top: 3%;
+    width: 80%;
+    align-self: center;
+    color: blueviolet;
+}
+.toggle{
+    align-self: center;
 }

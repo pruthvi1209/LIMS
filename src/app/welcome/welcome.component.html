@@ -1,7 +1,6 @@
 <div class="container" fxLayout="column">
-
   <div class="navBar">
-    <mat-toolbar   color="primary">
+    <mat-toolbar color="primary">
       <span>My Library</span>
       <span class="fill-remaining-space"></span>
       <ng-template [ngIf]="!authService.checkUser() ">
@@ -18,8 +17,9 @@
           <mat-icon (click)="register()">create</mat-icon>
         </div>
       </ng-template>
-      <ng-template [ngIf]="authService.checkUser()"  >
-           <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' " [matMenuTriggerFor]="userMenu" class="userImage" >
+      <ng-template [ngIf]="authService.checkUser()">
+        <img [src]="authService.currentUser.photoURL ? authService.currentUser.photoURL : 'assets/default_user_image.png' "
+          [matMenuTriggerFor]="userMenu" class="userImage">
         <mat-menu #userMenu="matMenu">
           <button mat-menu-item (click)="navigate()">My Profile</button>
           <button mat-menu-item (click)="logout()">Logout</button>
@@ -28,7 +28,7 @@
     </mat-toolbar>
   </div>
   <div class="searchBar">
-    <app-search-bar (foundBooks)="onBooksFound($event)" [category]=category></app-search-bar>
+    <app-search-bar (findWithText)="findBooksWithText($event)"  [category]=category></app-search-bar>
   </div>
   <div class="bookShelf" *ngIf="showResult">
     <label> Found {{filteredBooks.length}} books with "{{searchString}}"</label>
@@ -37,6 +37,6 @@
     <hr>
   </div>
   <div class="bookShelf" fxLayout="row" fxLayoutGap="3%">
-    <app-book-shelf *ngFor="let book of filteredBooks " [book]="book"></app-book-shelf>
+    <app-book-shelf *ngFor="let book of filteredBooks" [book]="book"></app-book-shelf>
   </div>
 </div>

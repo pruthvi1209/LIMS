@@ -21,6 +21,13 @@
       </mat-icon>
     </button>
     <button mat-button (click) ="userService.userAccountModification('borrowBook',book.isbn)">Borrow</button>
+    <ng-template [ngIf]="authService.isAdmin()">
+    <button mat-raised-button color="warn" (click)="deleteBook(book.isbn)" >Delete
+      <mat-icon>
+        delete
+      </mat-icon> 
+    </button>
+  </ng-template>
   </mat-card-actions>
   <mat-card-actions *ngIf="isReturnDateVisible">
       <button mat-button (click) = "userService.userAccountModification('return',book.isbn ,index)">Return Book</button>

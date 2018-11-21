@@ -95,4 +95,11 @@ export class AuthService {
         this.uiService.showSnackar(e.message, null , 3000);
         });
     }
+    isAdmin(){
+        if(this.currentUser && this.currentUser.email === "admin@admin.com"){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

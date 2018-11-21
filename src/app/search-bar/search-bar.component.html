@@ -1,22 +1,23 @@
-<div>
-    <form [formGroup]="searchForm" (ngSubmit)="getbooks()" fxLayout="column">
-        <mat-form-field class="searchBox" appearance="outline">
-            <input type="text" matInput placeholder="Search A Book Here" formControlName="searchText">
-        </mat-form-field>
+<div fxLayout="column">
+    <mat-form-field class="searchBox" appearance="outline">
+        <input type="text" matInput placeholder="Search a book here" [formControl]="searchText">
+    </mat-form-field>
+    <mat-slide-toggle class="toggle" [checked]="advance" [(ngModel)]="advance">
+        Show Advance Options
+    </mat-slide-toggle>
+    <div *ngIf="advance" fxLayout="column" fxLayoutGap="3%" fxLayoutAlign="center center">
         <div fxLayout="row" class="radio" fxLayoutGap="3%">
             <label>Search By:</label>
-            <div class="radio" *ngFor="let filter of searchBy">
-                <input type="radio" formControlName="filter" [value]="filter">{{ filter }}
-            </div>
-            <div class="dropdown">
-                <mat-select placeholder="Select Category" class="options" formControlName="category">
-                    <mat-option [value]=filter *ngFor="let filter of category">{{filter}}</mat-option>
-                </mat-select>
-            </div>
+            <mat-radio-group fxLayout="row" fxLayoutGap="10%" [(ngModel)]="myfilter" id="radioGroup" (ngModelChange)="searchBook()">
+                <mat-radio-button *ngFor="let filter of searchBy; trackBy:customTrackBy" [value]="filter">{{filter}}</mat-radio-button>
+            </mat-radio-group>
         </div>
-
-        <button mat-raised-button class="searchIcon" type="submit" color="accent">Search
+        <mat-select placeholder="Select Category" class="options" [(ngModel)]="dropDown" (ngModelChange)="searchBook()"
+            appearance="outline">
+            <mat-option [value]=filter *ngFor="let filter of category">{{filter}}</mat-option>
+        </mat-select>
+        <button mat-raised-button class="searchIcon"  (click)="searchBook()" color="accent">Search
             <mat-icon>search</mat-icon>
         </button>
-    </form>
+    </div>
 </div>
