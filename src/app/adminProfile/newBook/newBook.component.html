@@ -1,45 +1,18 @@
-<!-- <mat-form-field >
-    <mat-label>Title</mat-label>
-    <input matInput>
-</mat-form-field> -->
-<div fxLayout="row wrap">
-<form fxLayout="column" #f="ngForm" (ngSubmit)="onSubmit(f)">
-        <mat-form-field >
-            <mat-label>Title</mat-label>
-            <input type="text" matInput  ngModel name="title" title required>
-        </mat-form-field>
-        <mat-form-field >
-            <mat-label>Author</mat-label>
-            <input type="text" matInput  ngModel name="author"  required>
-        </mat-form-field>
-        <mat-form-field >
-            <mat-label>Image URL</mat-label>
-            <input type="text" matInput  ngModel name="imageurl" required>
-        </mat-form-field>
-        <mat-form-field >
-                <mat-label>Category</mat-label>
-                <input type="text" matInput  ngModel name="Category" required>
-        </mat-form-field>
-        <mat-form-field >
-                <mat-label>Copies</mat-label>
-                <input type="number" matInput  ngModel name="Copies" required>
-        </mat-form-field>
-        <mat-form-field >
-                <mat-label>ISBN</mat-label>
-                <input type="number" matInput  ngModel name="ISBN" required>
-        </mat-form-field>
-        <mat-form-field >
-                <mat-label>Publisher</mat-label>
-                <input type="text" matInput  ngModel name="Publisher" required>
-        </mat-form-field>
-        <mat-form-field >
-                <mat-label>Year</mat-label>
-                <input type="text" matInput  ngModel name="Year" required>
-        </mat-form-field>
-        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid"   >Submit</button>
-        <button type="reset" mat-raised-button color="primary" [disabled]="!f.invalid" mat-dialog-close >Cancel</button>        
-    </form>
-    <div width="10%">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/41vgmbgfrTL._SX404_BO1,204,203,200_.jpg">
+<div fxLayout="row wrap" class="container" fxLayoutGap="5%" >
+    <div>
+            <form fxLayout="column"  #f="ngForm" (ngSubmit)="fetchData(f)" >
+                    <mat-form-field appearance="outline">
+                        <mat-label>ISBN</mat-label>
+                        <input type="text" matInput  ngModel name="isbn" minlength="10" maxlength="13" minlength="10" pattern="^([0-9][0-9]*)$"  required class="isbnField">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Copies</mat-label>
+                        <input type="number" matInput ngModel name="copies" min=1 placeholder="10">
+                    </mat-form-field>
+                    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid"  >FetchData</button>        
+            </form>
     </div>
+    <div *ngIf="dataAvailable" >
+        <app-bookdetails [book] = newBook [isCloseVisible]="false" [addBook]= true [copies]= true  ></app-bookdetails>
     </div>
+</div>

@@ -2,9 +2,12 @@
     <mat-form-field class="searchBox" appearance="outline">
         <input type="text" matInput placeholder="Search a book here" [formControl]="searchText">
     </mat-form-field>
+    <div class="toogleCont" fxLayout="row" fxLayoutGap="10%">
+    <div>No Filters</div>
     <mat-slide-toggle class="toggle" [checked]="advance" [(ngModel)]="advance">
-        Show Advance Options
     </mat-slide-toggle>
+    <div>Advance Filters</div>
+</div>  
     <div *ngIf="advance" fxLayout="column" fxLayoutGap="3%" fxLayoutAlign="center center">
         <div fxLayout="row" class="radio" fxLayoutGap="3%">
             <label>Search By:</label>

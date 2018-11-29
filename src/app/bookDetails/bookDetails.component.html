@@ -1,4 +1,4 @@
-<div class="fa fa-close dialog" (click)="closeDialog()"></div>
+<div class="fa fa-close dialog" (click)="closeDialog()" *ngIf="isCloseVisible"></div>
 <div class="layout">
     <h1> {{book.title}}</h1>
     <div class="container" fxLayout="row wrap">
@@ -10,14 +10,19 @@
             <div>Author: {{book.author}}</div>
             <div>Category: {{book.category}}</div>
             <div>isbn: {{book.isbn}}</div>
+            <div *ngIf="copies">Copies: {{book.copies}}</div>
+            <div *ngIf="copies" class="description">Description: {{book.description}}</div>
             <div fxLayout="row">Rating : <div *ngFor="let star of starList" fxLayout="row">
                     <div class="{{ star ? 'fa fa-star' : 'fa  fa-star-o' }} outline">
                     </div>
                 </div>
             </div>
-            <div fxLayout="row">
+            <div fxLayout="row" *ngIf="!addBook">
                 <button mat-raised-button class="rightButton">Borrow Book</button>
                 <button mat-raised-button class="leftButton">Add to Whislist</button>
+            </div>
+            <div *ngIf="addBook">
+                <button mat-raised-button (click)="addingNewBook()">Add Book</button>
             </div>
         </div>
     </div>

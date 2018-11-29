@@ -44,6 +44,9 @@ export class BookShelfComponent implements OnInit {
     const dialogRef = this.dialog.open(BookDetailsComponent);
     const instance = dialogRef.componentInstance;
     instance.book = this.book;
+    instance.isCloseVisible = true;
+    instance.addBook = false;
+    instance.copies = false;
   }
   deleteBook(isbn) {
     const curretnUI = document.getElementById(isbn)

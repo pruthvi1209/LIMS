@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { BooksFetch } from '../../app/booksFetch.service';
 
 @Component({
     selector: 'app-bookdetails',
@@ -8,9 +9,12 @@ import { MatDialog } from '@angular/material';
   })
 
   export class BookDetailsComponent implements OnInit {
-    @Input() book;
+    @Input() book  ;
+    @Input() isCloseVisible;
+    @Input() addBook;
+    @Input() copies;
     starList = [];
-    constructor(private dialog: MatDialog){
+    constructor(private dialog: MatDialog, private bookService : BooksFetch){
     }
     ngOnInit(){
       for( let i=0; i<=4; i++){
@@ -24,4 +28,7 @@ import { MatDialog } from '@angular/material';
     closeDialog(){
       this.dialog.closeAll();
     }
+    addingNewBook(){
+      this.bookService.addBook(this.book);
+  }
   }

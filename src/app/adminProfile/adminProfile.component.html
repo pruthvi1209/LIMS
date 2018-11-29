@@ -10,25 +10,34 @@
                                 <button mat-menu-item (click)="logout()">Logout</button>
                         </mat-menu>
                 </div>
-        </mat-toolbar> 
+        </mat-toolbar>
         <div class="information" fxLayout="row wrap">
-            <div class="booksCount" fxLayout="column">
-                    <div class="fa fa-users bigIcon">
+                <div class="booksCount" fxLayout="column">
+                        <div class="fa fa-users bigIcon"></div>
+                        <div class="analytics" fxLayout="column">
+                                <div> Users Count</div>
+                                <div class="count">{{userCount}}</div>
+                        </div>
+
                 </div>
-                Users Count : 45
-            </div>
-            <div class="usersCount" fxLayout="column">
-                    <div class="fa fa-book bigIcon"></div>
-                    Books Count : 45
-            </div>
-            <div class="booksCount" fxLayout="column">
+                <div class="usersCount" fxLayout="column">
+                        <div class="fa fa-book bigIcon"></div>
+                        <div class="analytics" fxLayout="column">
+                                <div>Books Count</div>
+                                <div class="count">{{booksCount}}</div>
+                        </div>
+                </div>
+                <div class="booksCount" fxLayout="column">
                         <div class="fa fa-rss bigIcon"></div>
-                    Books owed by users : 45
-            </div>
+                        <div class="analytics" fxLayout="column">
+                                <div>Owed Books</div>
+                                <div class="count"> {{borrowedCount}} </div>
+                        </div>
+                </div>
         </div>
         <mat-tab-group>
-                <mat-tab label="Add Book"> 
-                  <app-newBook></app-newBook>
+                <mat-tab label="Add Book">
+                        <app-newBook></app-newBook>
                 </mat-tab>
-            </mat-tab-group>
-        </div>
+        </mat-tab-group>
+</div>

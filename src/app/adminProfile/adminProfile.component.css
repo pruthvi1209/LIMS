@@ -41,3 +41,12 @@
     text-align: center;
     margin-top: 2%;
 }
+.analytics{
+    color: black;
+    font-size: 18px;
+    align-self: center;
+}
+.count{
+    font-size: 30px;
+    align-self: center;
+}

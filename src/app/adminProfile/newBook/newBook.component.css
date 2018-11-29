@@ -1,3 +1,8 @@
-.mat-form-field{
-    width: 45%;
+
+.imagePreview{
+    width: 200px;
+    height: 200px;
+}
+.container{
+    width: 100%;
 }
